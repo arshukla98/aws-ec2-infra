@@ -34,6 +34,9 @@ import { CatalogGraphPage } from '@backstage/plugin-catalog-graph';
 import { RequirePermission } from '@backstage/plugin-permission-react';
 import { catalogEntityCreatePermission } from '@backstage/plugin-catalog-common/alpha';
 
+import { DynamicPickFieldExtension } from '@premise/plugin-dynamic-pick-extension';
+import { ScaffolderFieldExtensions } from '@backstage/plugin-scaffolder-react';
+
 const app = createApp({
   apis,
   bindRoutes({ bind }) {
@@ -74,7 +77,12 @@ const routes = (
         <ReportIssue />
       </TechDocsAddons>
     </Route>
-    <Route path="/create" element={<ScaffolderPage />} />
+    <Route path="/create" element={<ScaffolderPage />}
+    >
+      <ScaffolderFieldExtensions>
+        <DynamicPickFieldExtension />
+      </ScaffolderFieldExtensions>
+    </Route>
     <Route path="/api-docs" element={<ApiExplorerPage />} />
     <Route
       path="/tech-radar"
