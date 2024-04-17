@@ -39,6 +39,7 @@
     "@backstage/plugin-techdocs-backend": "^1.9.2",
     "@premise/plugin-form-data-backend": "^0.0.2",
     "app": "link:../app",
+    "aws-sdk": "^2.1600.0",
     "better-sqlite3": "^9.0.0",
     "dockerode": "^3.3.1",
     "express": "^4.17.1",
