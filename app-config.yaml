@@ -86,6 +86,12 @@ catalog:
       rules:
         - allow: [Template]
 
+    # Local example template
+    - type: file
+      target: ../../examples/template/aws_ec2_tf.yaml
+      rules:
+        - allow: [Template]
+
     # Local example organizational data
     - type: file
       target: ../../examples/org.yaml
