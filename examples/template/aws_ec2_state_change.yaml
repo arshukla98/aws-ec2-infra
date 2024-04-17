@@ -1,0 +1,76 @@
+# Define the API version and kind of resource
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+# Template metadata. Here's your intro to what this template does.
+metadata:
+  name: Change-AWS-EC2-Instance-State
+  title: Modify AWS EC2 Instance using Terraform and AWS
+  description:  Start/Stop/Reboot/Terminate Instance using Terraform and AWS
+# The specification for how the template behaves
+spec:
+  # Who owns this template. Generally, it could be a team or individual
+  owner: user:guest
+  # The type of service this template deploys
+  type: service
+  # User-input parameters. Makes your templates dynamic!
+  parameters:
+
+    - title: Choose a location
+      required:
+        - repoUrl
+      properties:
+        repoUrl:
+          title: Repository Location
+          type: string
+          ui:field: RepoUrlPicker
+          ui:options:
+            allowedHosts:
+              - github.com
+
+    # Parameters for setting up the EC2
+    - title: Basic EC2 Instance Configuration
+      required:
+        - instanceID
+        - region
+        - action
+      properties:
+        instanceID:
+          title: Instance ID
+          type: string
+          description: The ID of Instance
+          ui:field: DynamicPickExtension
+          ui:options:
+            form_data: ec2-instances/all # example/listOfPersons
+
+        region:
+          title: AWS Region
+          type: string
+          description: The AWS region where the instance will be deployed
+          enum:
+            - ap-south-1
+          enumNames:
+            - "Mumbai"
+
+        action:
+          title: Action Taken on Instance State
+          type: string
+          description: Start, Stop or reboot Instance
+          ui:autofocus: true
+          enum:
+            - start
+            - stop
+            - reboot
+            - terminate
+  steps:
+    - id: github-action
+      name: Trigger GitHub Action
+      action: github:actions:dispatch
+      input:
+        workflowId: manage-ec2-instanceState.yml  # GitHub Action workflow ID
+        #repoUrl: 'github.com?repo=<repo-name>&owner=<github-username>'
+        repoUrl: "${{ parameters.repoUrl | parseRepoUrl | pick('host') }}?repo=${{ parameters.repoUrl | parseRepoUrl | pick('repo') }}&owner=${{ parameters.repoUrl | parseRepoUrl | pick('owner') }}"
+        branchOrTagName: 'main'  # The branch to run this action on
+        workflowInputs:
+          instanceID: ${{ parameters.instanceID }}
+          awsRegion: ${{ parameters.region }}
+          action: ${{ parameters.action }}
