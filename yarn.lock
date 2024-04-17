@@ -3252,6 +3252,72 @@
     luxon "^3.0.0"
     react-use "^17.2.4"
 
+"@backstage/plugin-kubernetes-common@^0.7.5":
+  version "0.7.5"
+  resolved "https://registry.yarnpkg.com/@backstage/plugin-kubernetes-common/-/plugin-kubernetes-common-0.7.5.tgz#0c0324a3f1fff68aa78d8ea33aa0d74a28367adb"
+  integrity sha512-6pCJsF/SEAiQM8U6XXC0lK86Wgb62J4iDeIOuF1xuVwQy4VvbH+CTyDl96gXtiDi5/IvEN2ov50KCgIambTAGg==
+  dependencies:
+    "@backstage/catalog-model" "^1.4.5"
+    "@backstage/plugin-permission-common" "^0.7.13"
+    "@backstage/types" "^1.1.1"
+    "@kubernetes/client-node" "0.20.0"
+    kubernetes-models "^4.3.1"
+    lodash "^4.17.21"
+    luxon "^3.0.0"
+
+"@backstage/plugin-kubernetes-react@^0.3.4":
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/@backstage/plugin-kubernetes-react/-/plugin-kubernetes-react-0.3.4.tgz#0862d70a99079a3e229c21a5bd696b4729206d1c"
+  integrity sha512-PKulIsh7mz9Ra9xunHGj9HjJ02GC511QczNgT905JJRE2eXPzSQKnn2Pp16gAy33kGU6qfDbBf/v3FkwAxn5rg==
+  dependencies:
+    "@backstage/catalog-model" "^1.4.5"
+    "@backstage/core-components" "^0.14.4"
+    "@backstage/core-plugin-api" "^1.9.2"
+    "@backstage/errors" "^1.2.4"
+    "@backstage/plugin-kubernetes-common" "^0.7.5"
+    "@backstage/types" "^1.1.1"
+    "@kubernetes-models/apimachinery" "^1.1.0"
+    "@kubernetes-models/base" "^4.0.1"
+    "@kubernetes/client-node" "^0.20.0"
+    "@material-ui/core" "^4.9.13"
+    "@material-ui/icons" "^4.11.3"
+    "@material-ui/lab" "^4.0.0-alpha.61"
+    "@types/react" "^16.13.1 || ^17.0.0 || ^18.0.0"
+    cronstrue "^2.32.0"
+    js-yaml "^4.1.0"
+    kubernetes-models "^4.3.1"
+    lodash "^4.17.21"
+    luxon "^3.0.0"
+    react-use "^17.4.0"
+    xterm "^5.3.0"
+    xterm-addon-attach "^0.9.0"
+    xterm-addon-fit "^0.8.0"
+
+"@backstage/plugin-kubernetes@^0.11.9":
+  version "0.11.9"
+  resolved "https://registry.yarnpkg.com/@backstage/plugin-kubernetes/-/plugin-kubernetes-0.11.9.tgz#52faffbb886627baa9f47e6d697aaf2b2b4a4647"
+  integrity sha512-mH36NXQ2+usTGDAo3RxeB1rG6YeaT2A8kWrJpJ75gQg8ChUMnhcF2a6dvZnNDMytl1KNiha8YSMapOwR1G5BiQ==
+  dependencies:
+    "@backstage/catalog-model" "^1.4.5"
+    "@backstage/core-components" "^0.14.4"
+    "@backstage/core-plugin-api" "^1.9.2"
+    "@backstage/plugin-catalog-react" "^1.11.3"
+    "@backstage/plugin-kubernetes-common" "^0.7.5"
+    "@backstage/plugin-kubernetes-react" "^0.3.4"
+    "@kubernetes-models/apimachinery" "^1.1.0"
+    "@kubernetes-models/base" "^4.0.1"
+    "@kubernetes/client-node" "0.20.0"
+    "@material-ui/core" "^4.12.2"
+    "@types/react" "^16.13.1 || ^17.0.0 || ^18.0.0"
+    cronstrue "^2.2.0"
+    js-yaml "^4.0.0"
+    kubernetes-models "^4.1.0"
+    lodash "^4.17.21"
+    luxon "^3.0.0"
+    xterm "^5.2.1"
+    xterm-addon-attach "^0.9.0"
+    xterm-addon-fit "^0.8.0"
+
 "@backstage/plugin-org@^0.6.19":
   version "0.6.24"
   resolved "https://registry.yarnpkg.com/@backstage/plugin-org/-/plugin-org-0.6.24.tgz#351a8ec244135acccfc3c886df0da8d36d7a6fa2"
@@ -5261,7 +5327,35 @@
   dependencies:
     ioredis "^5.3.2"
 
-"@kubernetes/client-node@0.20.0":
+"@kubernetes-models/apimachinery@^1.1.0", "@kubernetes-models/apimachinery@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@kubernetes-models/apimachinery/-/apimachinery-1.2.1.tgz#39725bf5e1f50972475ee6e614d5d70e41876b13"
+  integrity sha512-mURvFnel3gaMXFchp8YeFmPBWuYifakuJnmRK1ad0Y7bxcPbcEntcb1rjdwitnHE0qTq3JZ2kBzpNqGO3+YJUw==
+  dependencies:
+    "@kubernetes-models/base" "^4.0.3"
+    "@kubernetes-models/validate" "^3.1.1"
+    tslib "^2.4.0"
+
+"@kubernetes-models/base@^4.0.1", "@kubernetes-models/base@^4.0.3":
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/@kubernetes-models/base/-/base-4.0.3.tgz#e973dfb60bb6d2fa29cbb281e2a74979d40efc9d"
+  integrity sha512-9Uo/RzB1ZvvPmnnpAE6yWPaFerMkpBxIHLuObexVDF813ZwVPdn56mmOOFfA6RyZtPdIT1AlhMozlHKOX16AGQ==
+  dependencies:
+    "@kubernetes-models/validate" "^3.1.1"
+    is-plain-object "^5.0.0"
+    tslib "^2.4.0"
+
+"@kubernetes-models/validate@^3.1.1":
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/@kubernetes-models/validate/-/validate-3.1.1.tgz#952362caf93d8e5d6b863c15558fd359d08346c2"
+  integrity sha512-s1YMn5+9jLG0S0441Tca8aukt05UqyqlloW6seJ43gdjBHWOYhfaG7ppw8Lmw0jvxF69yNV6wtYfXCTULXIfLw==
+  dependencies:
+    ajv "^8.12.0"
+    ajv-formats "^2.1.1"
+    ajv-formats-draft2019 "^1.6.1"
+    tslib "^2.4.0"
+
+"@kubernetes/client-node@0.20.0", "@kubernetes/client-node@^0.20.0":
   version "0.20.0"
   resolved "https://registry.yarnpkg.com/@kubernetes/client-node/-/client-node-0.20.0.tgz#4447ae27fd6eef3d4830a5a039f3b84ffd5c5913"
   integrity sha512-xxlv5GLX4FVR/dDKEsmi4SPeuB49aRc35stndyxcC73XnUEEwF39vXbROpHOirmDse8WE9vxOjABnSVS+jb7EA==
@@ -5450,14 +5544,14 @@
     react-is "^16.8.0 || ^17.0.0"
     react-transition-group "^4.4.0"
 
-"@material-ui/icons@^4.9.1":
+"@material-ui/icons@^4.11.3", "@material-ui/icons@^4.9.1":
   version "4.11.3"
   resolved "https://registry.yarnpkg.com/@material-ui/icons/-/icons-4.11.3.tgz#b0693709f9b161ce9ccde276a770d968484ecff1"
   integrity sha512-IKHlyx6LDh8n19vzwH5RtHIOHl9Tu90aAAxcbWME6kp4dmvODM3UvOHJeMIDzUbd4muuJKHmlNoBN+mDY4XkBA==
   dependencies:
     "@babel/runtime" "^7.4.4"
 
-"@material-ui/lab@4.0.0-alpha.61":
+"@material-ui/lab@4.0.0-alpha.61", "@material-ui/lab@^4.0.0-alpha.61":
   version "4.0.0-alpha.61"
   resolved "https://registry.yarnpkg.com/@material-ui/lab/-/lab-4.0.0-alpha.61.tgz#9bf8eb389c0c26c15e40933cc114d4ad85e3d978"
   integrity sha512-rSzm+XKiNUjKegj8bzt5+pygZeckNLOr+IjykH8sYdVk7dE9y2ZuUSofiMV2bJk3qU+JHwexmw+q0RyNZB9ugg==
@@ -9002,7 +9096,7 @@
   resolved "https://registry.yarnpkg.com/@types/range-parser/-/range-parser-1.2.7.tgz#50ae4353eaaddc04044279812f52c8c65857dbcb"
   integrity sha512-hKormJbkJqzQGhziax5PItDUTMAM9uE2XXQmM37dyd4hVM+5aVl7oVxMVUiVQn2oCQFN/LKCZdvSM0pFRqbSmQ==
 
-"@types/react-dom@*", "@types/react-dom@^18", "@types/react-dom@^18.0.0":
+"@types/react-dom@*", "@types/react-dom@^18.0.0":
   version "18.2.25"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-18.2.25.tgz#2946a30081f53e7c8d585eb138277245caedc521"
   integrity sha512-o/V48vf4MQh7juIKZU2QGDfli6p1+OOi5oXx36Hffpc9adsHeXjVp8rHuPkjd8VT8sOJ2Zp05HR7CdpGTIUFUA==
@@ -9040,12 +9134,21 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^16.13.1 || ^17.0.0", "@types/react@^16.13.1 || ^17.0.0 || ^18.0.0", "@types/react@^18":
+"@types/react@*", "@types/react@^16.13.1 || ^17.0.0 || ^18.0.0":
   version "18.2.79"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-18.2.79.tgz#c40efb4f255711f554d47b449f796d1c7756d865"
   integrity sha512-RwGAGXPl9kSXwdNTafkOEuFrTBD5SA2B3iEB96xi8+xu5ddUa/cpvyVCSNn+asgLCTHkb5ZxN8gbuibYJi4s1w==
   dependencies:
     "@types/prop-types" "*"
+    csstype "^3.0.2"
+
+"@types/react@^16.13.1 || ^17.0.0":
+  version "17.0.80"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.80.tgz#a5dfc351d6a41257eb592d73d3a85d3b7dbcbb41"
+  integrity sha512-LrgHIu2lEtIo8M7d1FcI3BdwXWoRQwMoXOZ7+dPTW0lYREjmlHl3P0U1VD0i/9tppOuv8/sam7sOjx34TxSFbA==
+  dependencies:
+    "@types/prop-types" "*"
+    "@types/scheduler" "^0.16"
     csstype "^3.0.2"
 
 "@types/request@^2.47.1", "@types/request@^2.48.8":
@@ -9079,6 +9182,11 @@
   version "2.1.7"
   resolved "https://registry.yarnpkg.com/@types/sarif/-/sarif-2.1.7.tgz#dab4d16ba7568e9846c454a8764f33c5d98e5524"
   integrity sha512-kRz0VEkJqWLf1LLVN4pT1cg1Z9wAuvI6L97V3m2f5B76Tg8d413ddvLBPTEHAZJlnn4XSvu0FkZtViCQGVyrXQ==
+
+"@types/scheduler@^0.16":
+  version "0.16.8"
+  resolved "https://registry.yarnpkg.com/@types/scheduler/-/scheduler-0.16.8.tgz#ce5ace04cfeabe7ef87c0091e50752e36707deff"
+  integrity sha512-WZLiwShhwLRmeV6zH+GkbOFT6Z6VklCItrDioxUnv+u4Ll+8vKeFySoFyK/0ctcRpOmwAicELfmys1sDc/Rw+A==
 
 "@types/semver@^7.3.12", "@types/semver@^7.5.0":
   version "7.5.8"
@@ -9692,6 +9800,16 @@ ajv-errors@^3.0.0, ajv-errors@~3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/ajv-errors/-/ajv-errors-3.0.0.tgz#e54f299f3a3d30fe144161e5f0d8d51196c527bc"
   integrity sha512-V3wD15YHfHz6y0KdhYFjyy9vWtEVALT9UrxfN3zqlI6dMioHnJrqOYfyPKol3oqrnCM9uwkcdCwkJ0WUcbLMTQ==
+
+ajv-formats-draft2019@^1.6.1:
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/ajv-formats-draft2019/-/ajv-formats-draft2019-1.6.1.tgz#6affe2220e7828360793776f1976de0420acccfb"
+  integrity sha512-JQPvavpkWDvIsBp2Z33UkYCtXCSpW4HD3tAZ+oL4iEFOk9obQZffx0yANwECt6vzr6ET+7HN5czRyqXbnq/u0Q==
+  dependencies:
+    punycode "^2.1.1"
+    schemes "^1.4.0"
+    smtp-address-parser "^1.0.3"
+    uri-js "^4.4.1"
 
 ajv-formats@^2.1.1, ajv-formats@~2.1.0:
   version "2.1.1"
@@ -11747,6 +11865,11 @@ cron@^3.0.0:
   dependencies:
     "@types/luxon" "~3.4.0"
     luxon "~3.4.0"
+
+cronstrue@^2.2.0, cronstrue@^2.32.0:
+  version "2.49.0"
+  resolved "https://registry.yarnpkg.com/cronstrue/-/cronstrue-2.49.0.tgz#d59f6d19e33030d45d9ecd3b845d4ccd79c6bfbd"
+  integrity sha512-FWZBqdStQaPR8ZTBQGALh1EK9Hl1HcG70dyGvD1rKLPafFO3H73o38dz/e8YkIlbLn3JxmBI/f6Doe3Nh+DcEQ==
 
 cross-env@^7.0.0:
   version "7.0.3"
@@ -16777,6 +16900,16 @@ knex@3, knex@^3.0.0:
     tarn "^3.0.2"
     tildify "2.0.0"
 
+kubernetes-models@^4.1.0, kubernetes-models@^4.3.1:
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/kubernetes-models/-/kubernetes-models-4.3.1.tgz#14b8e465410f22d96270e71f9bb62bf7e5066e9c"
+  integrity sha512-0/8E6tfDGo1mKq0g2gTfUwbBv9oaSQ+xjQ5xjCb4NRZD0nTvErwzBoEijym3eGX+L2RJjNKIBhI9k6VTj1dQWA==
+  dependencies:
+    "@kubernetes-models/apimachinery" "^1.2.1"
+    "@kubernetes-models/base" "^4.0.3"
+    "@kubernetes-models/validate" "^3.1.1"
+    tslib "^2.4.0"
+
 kuler@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/kuler/-/kuler-2.0.0.tgz#e2c570a3800388fb44407e851531c1d670b061b3"
@@ -20783,7 +20916,7 @@ react-universal-interface@^0.6.2:
   resolved "https://registry.yarnpkg.com/react-universal-interface/-/react-universal-interface-0.6.2.tgz#5e8d438a01729a4dbbcbeeceb0b86be146fe2b3b"
   integrity sha512-dg8yXdcQmvgR13RIlZbTRQOoUrDciFVoSBZILwjE2LFISxZZ8loVJKAkuzswl5js8BHda79bIb2b84ehU8IjXw==
 
-react-use@^17.2.4, react-use@^17.3.2:
+react-use@^17.2.4, react-use@^17.3.2, react-use@^17.4.0:
   version "17.5.0"
   resolved "https://registry.yarnpkg.com/react-use/-/react-use-17.5.0.tgz#1fae45638828a338291efa0f0c61862db7ee6442"
   integrity sha512-PbfwSPMwp/hoL847rLnm/qkjg3sTRCvn6YhUZiHaUa3FA6/aNoFX79ul5Xt70O1rK+9GxSVqkY0eTwMdsR/bWg==
@@ -21574,6 +21707,13 @@ schema-utils@^4.0.0, schema-utils@^4.2.0:
     ajv-formats "^2.1.1"
     ajv-keywords "^5.1.0"
 
+schemes@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/schemes/-/schemes-1.4.0.tgz#9d03302275e562488dd3afa7b654ed42e00569ec"
+  integrity sha512-ImFy9FbCsQlVgnE3TCWmLPCFnVzx0lHL/l+umHplDqAKd0dzFpnS6lFZIpagBlYhKwzVmlV36ec0Y1XTu8JBAQ==
+  dependencies:
+    extend "^3.0.0"
+
 screenfull@^5.1.0:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/screenfull/-/screenfull-5.2.0.tgz#6533d524d30621fc1283b9692146f3f13a93d1ba"
@@ -21867,7 +22007,7 @@ smart-buffer@^4.2.0:
   resolved "https://registry.yarnpkg.com/smart-buffer/-/smart-buffer-4.2.0.tgz#6e1d71fa4f18c05f7d0ff216dd16a481d0e8d9ae"
   integrity sha512-94hK0Hh8rPqQl2xXc3HsaBoOXKV20MToPkcXvwbISWLEs+64sBq5kFgn2kJDHb1Pry9yrP0dxrCI9RRci7RXKg==
 
-smtp-address-parser@1.0.10:
+smtp-address-parser@1.0.10, smtp-address-parser@^1.0.3:
   version "1.0.10"
   resolved "https://registry.yarnpkg.com/smtp-address-parser/-/smtp-address-parser-1.0.10.tgz#9fc4ed6021f13dc3d8f591e0ad0d50454073025e"
   integrity sha512-Osg9LmvGeAG/hyao4mldbflLOkkr3a+h4m1lwKCK5U8M6ZAr7tdXEz/+/vr752TSGE4MNUlUl9cIK2cB8cgzXg==
@@ -23551,7 +23691,7 @@ update-browserslist-db@^1.0.13:
     escalade "^3.1.1"
     picocolors "^1.0.0"
 
-uri-js@^4.2.2:
+uri-js@^4.2.2, uri-js@^4.4.1:
   version "4.4.1"
   resolved "https://registry.yarnpkg.com/uri-js/-/uri-js-4.4.1.tgz#9b1a52595225859e55f669d928f88c6c57f2a77e"
   integrity sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==
@@ -24355,6 +24495,21 @@ xtend@^4.0.0, xtend@~4.0.1:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/xtend/-/xtend-4.0.2.tgz#bb72779f5fa465186b1f438f674fa347fdb5db54"
   integrity sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ==
+
+xterm-addon-attach@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/xterm-addon-attach/-/xterm-addon-attach-0.9.0.tgz#dd18057f147a402de1df852c1de4c8f3b63b37be"
+  integrity sha512-NykWWOsobVZPPK3P9eFkItrnBK9Lw0f94uey5zhqIVB1bhswdVBfl+uziEzSOhe2h0rT9wD0wOeAYsdSXeavPw==
+
+xterm-addon-fit@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/xterm-addon-fit/-/xterm-addon-fit-0.8.0.tgz#48ca99015385141918f955ca7819e85f3691d35f"
+  integrity sha512-yj3Np7XlvxxhYF/EJ7p3KHaMt6OdwQ+HDu573Vx1lRXsVxOcnVJs51RgjZOouIZOczTsskaS+CpXspK81/DLqw==
+
+xterm@^5.2.1, xterm@^5.3.0:
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/xterm/-/xterm-5.3.0.tgz#867daf9cc826f3d45b5377320aabd996cb0fce46"
+  integrity sha512-8QqjlekLUFTrU6x7xck1MsPzPA571K5zNqWm0M0oroYEWVOptZ0+ubQSkQ3uxIEhcIHRujJy6emDWX4A7qyFzg==
 
 y18n@^5.0.5:
   version "5.0.8"
