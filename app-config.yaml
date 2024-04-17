@@ -110,3 +110,9 @@ auth:
       development:
         clientId: ${AUTH_CLIENT_ID}
         clientSecret: ${AUTH_CLIENT_SECRET}
+
+kubernetes:
+  serviceLocatorMethod:
+    type: 'singleTenant'
+  clusterLocatorMethods:
+    - type: 'localKubectlProxy'
