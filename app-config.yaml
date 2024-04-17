@@ -62,9 +62,9 @@ techdocs:
   publisher:
     type: 'local' # Alternatives - 'googleGcs' or 'awsS3'. Read documentation for using alternatives.
 
-auth:
+#auth:
   # see https://backstage.io/docs/auth/ to learn about auth providers
-  providers: {}
+# providers: {}
 
 scaffolder:
   # see https://backstage.io/docs/features/software-templates/configuration for software template options
@@ -101,3 +101,12 @@ catalog:
     #   target: https://github.com/backstage/backstage/blob/master/packages/catalog-model/examples/acme-corp.yaml
     #   rules:
     #     - allow: [User, Group]
+
+auth:
+  # see https://backstage.io/docs/auth/ to learn about auth providers
+  # https://stackoverflow.com/questions/76002512/getting-no-auth-provider-for-github-error-in-backstage
+  providers:
+    github:
+      development:
+        clientId: ${AUTH_CLIENT_ID}
+        clientSecret: ${AUTH_CLIENT_SECRET}
