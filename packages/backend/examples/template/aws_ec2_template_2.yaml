@@ -1,0 +1,122 @@
+# Define the API version and kind of resource
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+# Template metadata. Here's your intro to what this template does.
+metadata:
+  name: Create-AWS-EC2-Instance-Crossplane
+  title: Creating Instance using Crossplane and AWS
+  description: AWS EC2 Instance using Crossplane
+# The specification for how the template behaves
+spec:
+  # Who owns this template. Generally, it could be a team or individual
+  owner: user:arshukla98
+  # The type of service this template deploys
+  type: service
+  # User-input parameters. Makes your templates dynamic!
+  parameters:
+
+    - title: Choose a location
+      required:
+        - repoUrl
+      properties:
+        repoUrl:
+          title: Repository Location
+          type: string
+          ui:field: RepoUrlPicker
+          ui:options:
+            allowedHosts:
+              - github.com
+
+    # Parameters for setting up the EC2
+    - title: Basic EC2 Instance Configuration
+      required:
+        - instanceIP
+        - instanceImage
+        - instanceType
+        - region
+        - keyName
+        - instanceName
+
+      properties:
+        instanceIP:
+          title: Instance IP
+          type: string
+          description: The IP of existing instance
+
+        instanceImage:
+          title: Instance OS
+          type: string
+          description: The OS of Instance
+          ui:autofocus: true
+          enum:
+            - ami-0e670eb768a5fc3d4
+            - ami-03f4878755434977f
+            - ami-0cbadfea5b91c0ce1
+            - ami-05a5bb48beb785bf1
+          enumNames:
+            - "Amazon Linux 2023 AMI 64-bit (x86)"
+            - "Ubuntu Server 22.04 LTS (HVM), SSD Volume Type"
+            - "Microsoft Windows Server 2019 Base 64-bit (x86)"
+            - "Red Hat Enterprise Linux 9 (HVM), SSD Volume Type 64-bit (x86)"
+
+        instanceType:
+          title: The Type of Instance
+          type: string
+          description: The Type of Instance
+          ui:autofocus: true
+          enum:
+            - t2.micro
+            - t2.small
+            - t2.medium
+            - t2.large
+            - t3.micro
+            - t3.small
+            - t3.medium
+            - t3.large
+
+        region:
+          title: AWS Region
+          type: string
+          description: The AWS region where the instance will be deployed
+          enum:
+            - ap-south-1
+          enumNames:
+            - "Mumbai"
+
+        keyName:
+          title: Name of the existing Key 
+          type: string
+          description: The Existing keyName for Instance
+          enum:
+           - backstage-5F5kD69guSo
+
+        instanceName:
+          title: Instance Name
+          type: string
+          description: The Name of Instance
+
+  # Steps that the template will execute in order
+  steps:
+    # Trigger a GitHub Action to set up the EKS cluster
+    - id: github-action
+      name: Trigger GitHub Action
+      action: github:actions:dispatch
+      input:
+        workflowId: create-ec2-instance.yml  # GitHub Action workflow ID
+        #repoUrl: 'github.com?repo=<repo-name>&owner=<github-username>'
+        repoUrl: "${{ parameters.repoUrl | parseRepoUrl | pick('host') }}?repo=${{ parameters.repoUrl | parseRepoUrl | pick('repo') }}&owner=${{ parameters.repoUrl | parseRepoUrl | pick('owner') }}"
+        branchOrTagName: 'main'  # The branch to run this action on
+        workflowInputs:
+          instancePublicIP: ${{ parameters.instanceIP }}
+          imageID: ${{ parameters.instanceImage }}
+          instanceType: ${{ parameters.instanceType }}
+          region: ${{ parameters.region }}
+          keyName: ${{ parameters.keyName }}
+          vmName: ${{ parameters.instanceName }}
+
+    - id: register
+      name: Register
+      action: catalog:register
+      input:
+        repoContentsUrl: https://${{ parameters.repoUrl | parseRepoUrl | pick('host') }}/${{ parameters.repoUrl | parseRepoUrl | pick('owner') }}/${{ parameters.repoUrl | parseRepoUrl | pick('repo') }}/blob/main
+        catalogInfoPath: '/catalog-info.yaml'

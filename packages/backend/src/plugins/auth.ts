@@ -35,20 +35,78 @@ export default async function createPlugin(
       // your own, see the auth documentation for more details:
       //
       //   https://backstage.io/docs/auth/identity-resolver
+
+      // github: providers.github.create({
+      //   signIn: {
+      //     async resolver({ result: { fullProfile } }, ctx) {
+      //       const userId = fullProfile.username;
+      //       if (!userId) {
+      //         throw new Error(
+      //           `GitHub user profile does not contain a username`,
+      //         );
+      //       }
+
+      //       const userEntityRef = stringifyEntityRef({
+      //         kind: 'User',
+      //         name: userId,
+      //         namespace: DEFAULT_NAMESPACE,
+      //       });
+
+      //       return ctx.issueToken({
+      //         claims: {
+      //           sub: userEntityRef,
+      //           ent: [userEntityRef],
+      //         },
+      //       });
+      //     },
+      //   },
+      // }),
       github: providers.github.create({
         signIn: {
-          resolver(_, ctx) {
-            const userRef = 'user:default/guest'; // Must be a full entity reference
-            return ctx.issueToken({
-              claims: {
-                sub: userRef, // The user's own identity
-                ent: [userRef], // A list of identities that the user claims ownership through
-              },
-            });
-          },
-          // resolver: providers.github.resolvers.usernameMatchingUserEntityName(),
+          resolver: providers.github.resolvers.usernameMatchingUserEntityName(),
+        }
+      }),
+      // gitlab: providers.gitlab.create({
+      //   signIn: {
+      //     async resolver({ result: { fullProfile } }, ctx) {
+      //       return ctx.signInWithCatalogUser({
+      //         entityRef: {
+      //           name: fullProfile.id,
+      //         },
+      //       });
+      //     },
+      //   },
+      // }),
+      microsoft: providers.microsoft.create({
+        signIn: {
+          resolver:
+            providers.microsoft.resolvers.emailMatchingUserEntityAnnotation(),
         },
       }),
+      google: providers.google.create({
+        signIn: {
+          resolver:
+            providers.google.resolvers.emailLocalPartMatchingUserEntityName(),
+        },
+      }),
+      // okta: providers.okta.create({
+      //   signIn: {
+      //     resolver:
+      //       providers.okta.resolvers.emailMatchingUserEntityAnnotation(),
+      //   },
+      // }),
+      bitbucket: providers.bitbucket.create({
+        signIn: {
+          resolver:
+            providers.bitbucket.resolvers.usernameMatchingUserEntityAnnotation(),
+        },
+      }),
+      // bitbucketServer: providers.bitbucketServer.create({
+      //   signIn: {
+      //     resolver:
+      //       providers.bitbucketServer.resolvers.emailMatchingUserEntityProfileEmail(),
+      //   },
+      // }),
     },
   });
 }

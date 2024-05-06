@@ -1,6 +1,7 @@
 app:
   # Should be the same as backend.baseUrl when using the `app-backend` plugin.
-  baseUrl: http://localhost:7007
+  baseUrl: http://${HOST}:32007
+  title: Backstage
 
 backend:
   # Note that the baseUrl should be the URL that the browser and other clients
@@ -8,7 +9,15 @@ backend:
   # reachable not just from within the backend host, but from all of your
   # callers. When its value is "http://localhost:7007", it's strictly private
   # and can't be reached by others.
-  baseUrl: http://localhost:7007
+  baseUrl: http://${HOST}:32007
+  csp:
+    connect-src: ['self','http:']
+    upgrade-insecure-requests: false
+  cors:
+    origin: http://${HOST}:32007
+    methods: [GET, POST, PUT, DELETE]
+    credentials: true
+    Access-Control-Allow-Origin: '*'
   # The listener can also be expressed as a single <host>:<port> string. In this case we bind to
   # all interfaces, the most permissive setting. The right value depends on your specific deployment.
   listen: ':7007'
@@ -28,8 +37,80 @@ backend:
       #   ca: # if you have a CA file and want to verify it you can uncomment this section
       #     $file: <file-path>/ca/server.crt
 
+techdocs:
+  builder: 'local'
+  generator:
+    runIn: 'local'
+  publisher:
+    type: 'local'
+
 catalog:
-  # Overrides the default list locations from app-config.yaml as these contain example data.
-  # See https://backstage.io/docs/features/software-catalog/#adding-components-to-the-catalog for more details
-  # on how to get entities into the catalog.
-  locations: []
+  rules:
+    - allow: [Component, System, API, Resource, Location]
+  locations:
+    - type: url
+      target: https://github.com/mclarke47/dice-roller/blob/master/catalog-info.yaml 
+
+    - type: file
+      target: examples/entities.yaml
+
+    # Local example template
+    - type: file
+      target: examples/template/template.yaml
+      rules:
+        - allow: [Template]
+
+    # AWS EC2 Template
+    - type: file
+      target: examples/template/aws_ec2_template.yaml
+      rules:
+        - allow: [Template]
+
+    # AWS EC2 Instance State Template
+    - type: file
+      target: examples/template/aws_ec2_state_change.yaml
+      rules:
+        - allow: [Template]
+
+    # AWS EC2 Template for Crossplane
+    - type: file
+      target: examples/template/aws_ec2_template_2.yaml
+      rules:
+        - allow: [Template]
+
+    # Local example organizational data
+    - type: file
+      target: examples/org.yaml
+      rules:
+        - allow: [User, Group]
+
+integrations:
+  github:
+    - host: github.com
+      # This is a Personal Access Token or PAT from GitHub. You can find out how to generate this token, and more information
+      # about setting up the GitHub integration here: https://backstage.io/docs/getting-started/configuration#setting-up-a-github-integration
+      token: ${GITHUB_TOKEN}
+    ### Example for how to add your GitHub Enterprise instance using the API:
+    # - host: ghe.example.net
+    #   apiBaseUrl: https://ghe.example.net/api/v3
+    #   token: ${GHE_TOKEN}
+  
+kubernetes:
+  serviceLocatorMethod:
+    type: 'singleTenant'
+  clusterLocatorMethods:
+    - type: 'localKubectlProxy'
+
+auth:
+  # experimentalExtraAllowedOrigins:
+  #  - 'http://172.30.46.18:32007'
+  # see https://backstage.io/docs/auth/ to learn about auth providers
+  environment: production
+  providers:
+    github:
+      production:
+        clientId: ${AUTH_CLIENT_ID}
+        clientSecret: ${AUTH_CLIENT_SECRET}
+        signIn:
+          resolvers:
+            - resolver: usernameMatchingUserEntityName

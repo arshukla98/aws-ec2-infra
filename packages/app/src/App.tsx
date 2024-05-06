@@ -37,6 +37,9 @@ import { catalogEntityCreatePermission } from '@backstage/plugin-catalog-common/
 import { DynamicPickFieldExtension } from '@premise/plugin-dynamic-pick-extension';
 import { ScaffolderFieldExtensions } from '@backstage/plugin-scaffolder-react';
 
+import { SignInPage } from '@backstage/core-components';
+import { providers } from './identityProviders';
+
 const app = createApp({
   apis,
   bindRoutes({ bind }) {
@@ -55,6 +58,18 @@ const app = createApp({
     bind(orgPlugin.externalRoutes, {
       catalogIndex: catalogPlugin.routes.catalogIndex,
     });
+  },
+  components: {
+    SignInPage: props => {
+      return (
+        <SignInPage
+          {...props}
+          providers={['guest',...providers]}
+          title="Select a sign-in method"
+          align="center"
+        />
+      );
+    },
   },
 });
 

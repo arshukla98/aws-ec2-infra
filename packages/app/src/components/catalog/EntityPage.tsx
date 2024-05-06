@@ -31,7 +31,7 @@ import {
 import {
   isGithubActionsAvailable,
   EntityGithubActionsContent,
-} from '@backstage/plugin-github-actions';
+} from './@backstage/plugin-github-actions'; // local package
 import {
   EntityUserProfileCard,
   EntityGroupProfileCard,
