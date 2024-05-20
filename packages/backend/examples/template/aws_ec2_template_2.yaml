@@ -41,7 +41,10 @@ spec:
         instanceIP:
           title: Instance IP
           type: string
-          description: The IP of existing instance
+          description: The IP of Crossplane Backed Instance
+          ui:field: DynamicPickExtension
+          ui:options:
+            form_data: crossplane/ec2
 
         instanceImage:
           title: Instance OS

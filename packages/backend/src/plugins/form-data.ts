@@ -3,6 +3,7 @@ import { Router } from 'express';
 import { PluginEnvironment } from '../types';
 import { exampleRouter } from '../providers/example';
 import { runningEC2Router } from '../providers/running_ec2_instances';
+import { crossplaneEC2Router } from '../providers/crossplane_ec2_instance';
 import { JsonValue } from '@backstage/types';
 import { Config } from '@backstage/config';
 
@@ -71,6 +72,10 @@ export default async function createPlugin(
       {
         path: '/ec2-instances',
         router: runningEC2Router,
+      },
+      {
+        path: '/crossplane',
+        router: crossplaneEC2Router,
       }
     ],
   );
